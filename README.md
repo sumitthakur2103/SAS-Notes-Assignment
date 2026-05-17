@@ -139,7 +139,7 @@ npm start
 
 ```txt
 Email: sumit@gmail.com
-Password: pass
+Password: sumit@
 ```
 
 ---
