@@ -54,29 +54,6 @@ https://sas-notes-assignment.onrender.com/
 
 ---
 
-# 📂 Project Structure
-
-```bash
-AI-Notes-Workspace/
-│
-├── backend/
-│   ├── src/
-│   ├── routes/
-│   ├── controllers/
-│   ├── middleware/
-│   └── server.js
-│
-├── frontend/
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── main.jsx
-│
-└── README.md
-```
-
----
-
 # ⚙️ Environment Variables
 
 ## Backend `.env`
