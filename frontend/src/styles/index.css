@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --glass: rgba(255,255,255,0.06);
+}
+
+body{ @apply bg-slate-900 text-white; }
+
+.glass{ background: var(--glass); }
+
+/* simple utilities */
+.line-clamp-3{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }

@@ -1,0 +1,26 @@
+# dependencies
+backend/node_modules
+frontend/node_modules
+
+# environment files
+.env
+backend/.env
+frontend/.env
+
+# build folders
+dist
+build
+
+# logs
+npm-debug.log*
+
+# system files
+.DS_Store
+Thumbs.db
+
+# vercel
+.vercel
+
+# editor settings
+.vscode
+.idea
