@@ -22,14 +22,20 @@ export default function Login(){
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-800"> 
-      <form onSubmit={submit} className="bg-white/5 backdrop-blur-md p-8 rounded-xl w-full max-w-md glass">
-        <h2 className="text-2xl font-semibold mb-4 text-white">Welcome back</h2>
-        <input className="w-full p-3 rounded-md mb-2" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} />
-        <input type="password" className="w-full p-3 rounded-md mb-4" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-        <button className="w-full py-3 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white" disabled={loading}>{loading? 'Loading...':'Sign in'}</button>
-        <p className="mt-3 text-sm text-slate-300">No account? <Link to="/signup" className="text-indigo-300">Create one</Link></p>
-      </form>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-full max-w-4xl p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="hidden md:flex flex-col justify-center p-8 rounded-xl card">
+          <h2 className="text-3xl font-bold mb-2">AI Notes Workspace</h2>
+          <p className="text-slate-300">Smart notes with AI summaries, sharing and fast search. Built for modern workflows.</p>
+        </div>
+        <form onSubmit={submit} className="bg-white/3 backdrop-blur-md p-8 rounded-xl w-full glass">
+          <h2 className="text-2xl font-semibold mb-4 text-white">Welcome back</h2>
+          <input className="input mb-3" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} />
+          <input type="password" className="input mb-4" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+          <button className="w-full py-3 rounded-md btn-primary" disabled={loading}>{loading? 'Loading...':'Sign in'}</button>
+          <p className="mt-3 text-sm text-slate-300">No account? <Link to="/signup" className="text-indigo-300">Create one</Link></p>
+        </form>
+      </div>
     </div>
   );
 }

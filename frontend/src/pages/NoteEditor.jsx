@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getNote, updateNote, deleteNote, aiSummary, aiTitle, aiActions, generateShare } from '../services/noteService';
-import Header from '../components/Header';
+import Layout from '../components/Layout';
+import { motion } from 'framer-motion';
 
 export default function NoteEditor(){
   const { id } = useParams();
@@ -19,23 +20,22 @@ export default function NoteEditor(){
   const actions = async ()=>{ const { data } = await aiActions({ content: note.content }); alert(JSON.stringify(data.data.actions)); };
   const share = async ()=>{ const { data } = await generateShare(id); prompt('Share URL', window.location.origin + data.data.url); };
 
-  if (!note) return <div className="min-h-screen bg-slate-900 text-white p-6"><Header/>Loading...</div>;
+  if (!note) return <Layout><div className="p-8 card">Loading...</div></Layout>;
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6">
-      <Header />
-      <div className="mt-6 max-w-3xl">
-        <input value={note.title} onChange={(e)=>setNote({...note, title: e.target.value})} className="w-full p-3 rounded-md text-2xl bg-white/5" />
-        <textarea value={note.content} onChange={(e)=>setNote({...note, content: e.target.value})} rows={12} className="w-full p-3 mt-3 rounded-md bg-white/5" />
-        <div className="mt-3 flex gap-2">
-          <button onClick={save} className="bg-indigo-600 px-3 py-2 rounded">{saving?'Saving...':'Save'}</button>
-          <button onClick={suggestTitle} className="bg-purple-600 px-3 py-2 rounded">Suggest title</button>
-          <button onClick={makeSummary} className="bg-slate-600 px-3 py-2 rounded">AI Summary</button>
-          <button onClick={actions} className="bg-emerald-600 px-3 py-2 rounded">Extract actions</button>
-          <button onClick={share} className="bg-yellow-500 px-3 py-2 rounded">Share</button>
-          <button onClick={remove} className="bg-red-600 px-3 py-2 rounded">Delete</button>
+    <Layout>
+      <motion.div initial={{ opacity:0, y:6 }} animate={{ opacity:1, y:0 }} className="max-w-3xl">
+        <input value={note.title} onChange={(e)=>setNote({...note, title: e.target.value})} className="input text-2xl font-semibold" />
+        <textarea value={note.content} onChange={(e)=>setNote({...note, content: e.target.value})} rows={14} className="input mt-3 min-h-[320px]" />
+        <div className="mt-4 flex gap-2 flex-wrap">
+          <button onClick={save} className="btn-primary">{saving?'Saving...':'Save'}</button>
+          <button onClick={suggestTitle} className="btn-primary bg-purple-600">Suggest title</button>
+          <button onClick={makeSummary} className="btn-ghost">AI Summary</button>
+          <button onClick={actions} className="btn-ghost">Extract actions</button>
+          <button onClick={share} className="btn-ghost">Share</button>
+          <button onClick={remove} className="btn-ghost text-red-400">Delete</button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </Layout>
   );
 }

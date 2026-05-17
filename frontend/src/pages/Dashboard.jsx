@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getNotes } from '../services/noteService';
 import useNotes from '../store/useNotes';
-import Header from '../components/Header';
+import Layout from '../components/Layout';
 import NoteCard from '../components/NoteCard';
 
 export default function Dashboard(){
@@ -20,13 +20,12 @@ export default function Dashboard(){
   useEffect(()=>{ load(); }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6">
-      <Header />
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        {loading && <div>Loading...</div>}
-        {!loading && notes.length===0 && <div className="text-slate-300">No notes yet — create one</div>}
-        {notes.map(n=> <NoteCard key={n._id} note={n} />)}
+    <Layout>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {loading && Array.from({length:6}).map((_,i)=>(<div key={i} className="p-4 card skeleton" style={{height:120}}/>))}
+        {!loading && notes.length===0 && <div className="text-slate-300 p-8 card">No notes yet — click New note to start your first note.</div>}
+        {notes.map(n=> <NoteCard key={n._1d} note={n} />)}
       </div>
-    </div>
+    </Layout>
   );
 }

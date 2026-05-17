@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getNotes, createNote } from '../services/noteService';
 import useNotes from '../store/useNotes';
-import Header from '../components/Header';
+import Layout from '../components/Layout';
 import NoteCard from '../components/NoteCard';
 
 export default function Notes(){
@@ -25,16 +25,16 @@ export default function Notes(){
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6">
-      <Header />
-      <div className="mt-6 flex justify-end">
-        <button onClick={add} className="bg-indigo-600 px-4 py-2 rounded">New note</button>
+    <Layout>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold">Your Notes</h2>
+        <button onClick={add} className="btn-primary">New note</button>
       </div>
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        {loading && <div>Loading...</div>}
-        {!loading && notes.length===0 && <div className="text-slate-300">No notes yet — create one</div>}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {loading && Array.from({length:6}).map((_,i)=>(<div key={i} className="p-4 card skeleton" style={{height:120}}/>))}
+        {!loading && notes.length===0 && <div className="text-slate-300 p-8 card">No notes yet — create one to see it here.</div>}
         {notes.map(n=> <NoteCard key={n._id} note={n} />)}
       </div>
-    </div>
+    </Layout>
   );
 }
